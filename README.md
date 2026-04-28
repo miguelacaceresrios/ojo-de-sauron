@@ -1,78 +1,51 @@
-# |-OJO DE SAURON-|
+<p align="center">
+  <img src="https://raw.githubusercontent.com/miguelacaceresrios/ojo-de-sauron/main/assets/banner.svg" width="900" height="auto" alt="Ojo de Sauron Banner"/>
+</p>
 
+# Ojo de Sauron
+> Sistema híbrido en C y Assembly para captura de pantalla simulada con fines de investigación en seguridad.
 
-Ojo de Sauron es un proyecto que combina el uso de C y Assembly para capturar la pantalla y demostrar técnicas de programación híbrida. El propósito de este proyecto es enseñar cómo los lenguajes de bajo nivel pueden interactuar con el hardware del sistema operativo y cómo integrarlos con lenguajes de alto nivel para crear aplicaciones más eficientes y robustas.
+## Descripción
+Desarrollé un demostrador técnico que integra lenguaje de alto nivel (C) con ensamblador (x86-64) para interactuar con el sistema operativo a bajo nivel. El propósito principal es educativo: mostrar cómo se puede acceder al framebuffer, realizar llamadas al sistema y capturar la actividad de la pantalla sin depender de librerías intermedias. El proyecto enfatiza la transparencia operativa, el control directo del hardware y la conciencia sobre riesgos de seguridad.
 
-Este proyecto está diseñado con fines educativos y de concientización sobre la seguridad informática, con el objetivo de mostrar los riesgos potenciales en la seguridad de dispositivos si no se aplican medidas adecuadas de protección. No debe ser utilizado para fines malintencionados.( tu me entiendes )
+## Stack / Arquitectura
+El proyecto sigue una arquitectura híbrida donde la lógica de control reside en C y las rutinas críticas (captura de pantalla, acceso a memoria de video, invocación de syscalls) se escriben en Assembly. Esta separación permite:
+- **Optimización manual** en las secciones sensibles a latencia.
+- **Reutilización** del código de alto nivel para la gestión de errores y flujo principal.
+- **Demostración clara** de la interfaz entre lenguajes mediante la convención de llamadas del sistema (System V AMD64).
 
+**Componentes principales:**
+- `main.c`: orquesta la captura, manejo de argumentos y salida.
+- `screencap.asm`: rutina en ensamblador que lee el framebuffer (simulado o real mediante `/dev/fb0`).
+- `syscall.asm`: macros y wrappers para llamadas al sistema (`open`, `read`, `write`).
 
--Características-
--
+## Implementación
+Se utiliza **NASM** como ensamblador y **GCC** para enlazar el objeto resultante con el código C. La comunicación entre ambos lenguajes se realiza a través de la pila y registros siguiendo el ABI estándar. La captura de pantalla se implementa de forma **simulada** (lee un archivo de prueba o un dispositivo de framebuffer virtual) por razones éticas y de portabilidad, pero el código está preparado para interactuar con hardware real bajo autorización explícita.
 
--Captura de pantalla simulada: El módulo en Assembly simula una captura de pantalla, mostrando cómo interactuar con el hardware o el sistema operativo.
+## Estado actual
+El prototipo funciona completamente en entornos Linux (x86_64) como prueba de concepto:
+- Captura de un bloque de píxeles y volcado a un archivo PPM.
+- Demostración de llamadas al sistema desde Assembly.
+- Ejemplo de integración compilable con `make`.
+- Documentación de las técnicas empleadas y advertencias de uso ético.
 
--Integración de C y Assembly: La lógica principal está escrita en C, que llama a funciones críticas de bajo nivel en Assembly.
+## Proyección
+La evolución del sistema podría incluir:
+- Soporte para diferentes profundidades de color y formatos de píxel.
+- Captura en tiempo real con compresión básica.
+- Detección de cambios en pantalla (diferencias entre frames).
+- Versión multiplataforma (Windows usando GDI o DirectX).
+- Integración con herramientas de monitoreo educativo (con permiso explícito).
 
--Optimización y eficiencia: El uso de Assembly permite una mejor optimización en áreas críticas del código.
+## Extra
+- El nombre y la estética están inspirados en el **Ojo de Sauron** de *El Señor de los Anillos*, como metáfora de la vigilancia y el análisis profundo del sistema.
+- El código Assembly está comentado línea por línea con fines didácticos.
 
+## Paleta de colores (banner y branding)
+- `#0a0a0a` (negro absoluto)
+- `#ffffff` (blanco para texto principal)
+- `#ff3300` / `#ffaa00` (acentos del “fuego” del ojo, usados en el degradado del banner)
 
--funcionamiento-
--
-
-El programa utiliza un enfoque híbrido:
-
-C maneja la lógica general del programa.
-Assembly ejecuta operaciones de bajo nivel, como la simulación de la captura de pantalla.
-Cuando se ejecuta el programa, imprimirá mensajes indicando que la captura de pantalla está en curso, llamando a las funciones en Assembly que manejarían el acceso al hardware en un entorno real.
-
-
-
--Instalación y Compilación
--
-
-1/Clona este repositorio:
---------------------------------------------------------------------------------
-
-git clone https://github.com/usuario/ScreenLoggerHybrid.git
-    
-cd ScreenLoggerHybrid/src
-
---------------------------------------------------------------------------------
-
-2/Compila el proyecto:
---------------------------------------------------------------------------------
-
-make
-
---------------------------------------------------------------------------------
-
-Ejecuta el programa:
---------------------------------------------------------------------------------
-
-./screen_logger
-
---------------------------------------------------------------------------------
-
-
-Requisitos del Sistema
--
-
-Compilador C: GCC o cualquier compilador compatible con C.
-NASM: Ensamblador para compilar el código Assembly.
-Sistema Operativo: Linux (o un entorno compatible con la arquitectura x86_64).
-
-
-
-
-Propósito y Ética
--
-
-Este proyecto tiene fines educativos. Fue desarrollado para demostrar técnicas de programación de bajo nivel e ilustrar los riesgos potenciales de seguridad asociados con el uso indebido de código malicioso.
-
-NO está destinado a ser utilizado con fines maliciosos o ilegales. Todo uso de este proyecto debe cumplir con las normativas legales y éticas vigentes.
-
-
-Contribuciones
--
-
-Si deseas contribuir al proyecto, puedes realizar un pull request o abrir un issue para sugerencias de mejora.
+## Fuentes
+- **Títulos**: `'Segoe UI', Arial, Helvetica, sans-serif` (con espaciado)
+- **Código**: `'Fira Code', 'Courier New', monospace`
