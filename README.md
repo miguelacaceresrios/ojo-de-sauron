@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/miguelacaceresrios/ojo-de-sauron/main/assets/banner.svg" width="900" height="auto" alt="Ojo de Sauron Banner"/>
-</p>
-
 # Ojo de Sauron
 > Sistema híbrido en C y Assembly para captura de pantalla simulada con fines de investigación en seguridad.
 
