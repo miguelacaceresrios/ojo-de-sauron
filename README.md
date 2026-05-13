@@ -45,3 +45,4 @@ La evolución del sistema podría incluir:
 ## Fuentes
 - **Títulos**: `'Segoe UI', Arial, Helvetica, sans-serif` (con espaciado)
 - **Código**: `'Fira Code', 'Courier New', monospace`}
+
