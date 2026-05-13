@@ -11,3 +11,5 @@ capture_screen:
     ; (Esta parte es ficticia para el ejemplo)
     ; Ejemplo de código de interacción con hardware aquí
     ret
+
+mm
